@@ -3,8 +3,11 @@ package server
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"spark-url/utils/json"
 	"strings"
 )
@@ -48,6 +51,7 @@ func Start() {
 	product.Name = "Apple"
 	product.Price = 10000
 	http.HandleFunc("/product", product.ServeHTTP)
+	http.HandleFunc("/template", TemplateFunc)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -61,4 +65,46 @@ type Product struct {
 func (p Product) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	byte, _ := json.Marshal(&p)
 	w.Write(byte)
+}
+
+func TemplateFunc(w http.ResponseWriter, r *http.Request) {
+	var info = struct {
+		Name   string `json:"name"`
+		Age    int    `json:"age"`
+		School string `json:"school"`
+		Infos  []struct {
+			Name   string `json:"name"`
+			Age    int    `json:"age"`
+			School string `json:"school"`
+		}
+	}{
+		Name:   "XieWei",
+		Age:    20,
+		School: "ShangHai",
+		Infos: []struct {
+			Name   string `json:"name"`
+			Age    int    `json:"age"`
+			School string `json:"school"`
+		}{
+			{
+				Name:   "Apple",
+				Age:    12,
+				School: "beijing",
+			},
+			{
+				Name:   "Google",
+				Age:    20,
+				School: "Hello kitty",
+			},
+		},
+	}
+
+	pwd, _ := os.Getwd()
+	tpl, err := template.New("index.html").ParseFiles(filepath.Join(pwd, "github.com/wuxiaoxiaoshen/go-web/example/template/index.html"),
+		filepath.Join(pwd, "github.com/wuxiaoxiaoshen/go-web/example/template/body.html"))
+	if err != nil {
+		log.Println(err)
+	}
+	tpl.Execute(w, &info)
+
 }
