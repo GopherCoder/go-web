@@ -41,6 +41,7 @@ func String(w http.ResponseWriter, r *http.Request) {
 	var buf strings.Builder
 	buf.WriteString("真累啊")
 	log.Println(buf.String())
+	io.WriteString(w, "da")
 	w.Write([]byte(buf.String()))
 
 }

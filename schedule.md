@@ -17,11 +17,22 @@
     - Fmt.Fprintf
     - io.WriteString
     - W.Write
-    - tempalte.Execute
+    - template.Execute
 - 请求
     - URL
     - Method
     - Params
+    - Body
+        - strings.NewReader
+        - bytes.NewBuffer
+
+
+为什么可以这么操作？
+
+- 接口
+- 实现
+- 源码分享
+
 
 ## 2. 模版
 
