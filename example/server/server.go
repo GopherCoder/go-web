@@ -2,17 +2,19 @@ package server
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-	"spark-url/utils/json"
 	"strings"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "xixi")
 	fmt.Fprintf(w, "hello world")
 }
 
@@ -50,7 +52,7 @@ func Start() {
 	var product Product
 	product.Name = "Apple"
 	product.Price = 10000
-	http.HandleFunc("/product", product.ServeHTTP)
+	http.Handle("/product", product)
 	http.HandleFunc("/template", TemplateFunc)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
