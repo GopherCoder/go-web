@@ -22,6 +22,7 @@ func World(w http.ResponseWriter, r *http.Request) {
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "hello world")
 	w.Write(buf.Bytes())
+
 }
 
 func Json(w http.ResponseWriter, r *http.Request) {

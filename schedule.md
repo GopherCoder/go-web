@@ -3,7 +3,7 @@
 
 原则：
 
-- 不使用第三方库
+- Restful 风格的API不使用第三方库、GraphQL 风格的API 使用第三方库
 - 源码梳理
 
 
@@ -17,6 +17,9 @@
     - Fmt.Fprintf
     - io.WriteString
     - W.Write
+        - bytes.Buffer
+        - []bytes
+        - strings.Builder
     - template.Execute
 - 请求
     - URL
@@ -49,6 +52,13 @@
 - project-layout
 
 ## 4. database
+
+模型建立：
+    - 微信朋友圈后端数据模型设计
+        - 朋友
+        - 聊天组
+        - 个人信息等
+        - 朋友圈等
 
 - 原生
 - gorm
