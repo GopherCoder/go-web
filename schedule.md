@@ -66,7 +66,9 @@
 
 ## 5. 前端模版
 
-## 6.
+## 6. 测试
+
+- httptest.NewRecorder
 
 
 
@@ -74,4 +76,6 @@
 ## 第二部
 
 > gin, go-restful, echo , iris, beego
+
+> 使用第三方库如何开发
 

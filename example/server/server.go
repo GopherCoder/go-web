@@ -8,6 +8,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
@@ -68,6 +69,7 @@ type Product struct {
 
 func (p Product) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	byte, _ := json.Marshal(&p)
+	httptest.NewRecorder()
 	w.Write(byte)
 }
 
